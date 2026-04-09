@@ -1,0 +1,151 @@
+# =============================================================================
+# EternalShade3D Utility Toolbox - .gitignore
+# PROTECTED REPOSITORY - Source code is NOT exposed publicly
+# =============================================================================
+
+# -------------------------------------------------------------------
+# CRITICAL: Block all addon source code from being committed
+# -------------------------------------------------------------------
+
+# Block all Python files (addon source code)
+*.py
+
+# Block all Blender addon directories
+*.pyc
+__pycache__/
+*.pyo
+
+# -------------------------------------------------------------------
+# Blender-specific ignores
+# -------------------------------------------------------------------
+
+# Blender project files (example scenes, not part of public repo)
+*.blend
+*.blend1
+*.blend2
+*.blend.bak
+.blend.bak
+
+# Internal development docs (not for public)
+API Overview.txt
+DOC.txt
+*.todo
+
+# Version archives
+archive/
+
+# -------------------------------------------------------------------
+# Build and distribution artifacts
+# -------------------------------------------------------------------
+
+# Zip files (addon distribution)
+*.zip
+
+# Build directories
+build/
+dist/
+*.egg-info/
+
+# -------------------------------------------------------------------
+# IDE and editor files
+# -------------------------------------------------------------------
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# -------------------------------------------------------------------
+# OS files
+# -------------------------------------------------------------------
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# -------------------------------------------------------------------
+# Python environment
+# -------------------------------------------------------------------
+
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# -------------------------------------------------------------------
+# Documentation build (GitHub Pages)
+# -------------------------------------------------------------------
+
+# Jekyll (if using)
+.jekyll-cache/
+_site/
+
+# -------------------------------------------------------------------
+# Secrets and credentials
+# -------------------------------------------------------------------
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# AWS, API keys, etc.
+*.pem
+*.key
+*.cert
+
+# -------------------------------------------------------------------
+# Git-specific
+# -------------------------------------------------------------------
+
+# Git lock file
+index.lock
+
+# -------------------------------------------------------------------
+# Temporary files
+# -------------------------------------------------------------------
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# -------------------------------------------------------------------
+# Development artifacts (keep these out)
+# -------------------------------------------------------------------
+
+# Implementation plans, internal docs
+implementation_plan.md
+*.todo
+TODO.md
+
+# -------------------------------------------------------------------
+# EXCEPTIONS: What IS allowed in this repo
+# -------------------------------------------------------------------
+# The following files are explicitly allowed (public-facing):
+#   - blender_manifest.toml (metadata only, no code)
+#   - LICENSE (restrictive license)
+#   - README.md (product documentation)
+#   - docs/ (user guides, no source code)
+#   - .github/ (workflows for Pages deployment)
+#   - index.html (GitHub Pages landing page)
+#   - assets/ (screenshots, logos for marketing)
+#   - QWEN.md (project context)
+# -------------------------------------------------------------------

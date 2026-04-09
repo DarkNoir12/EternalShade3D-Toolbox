@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternal Utility Toolbox ◈ | Blender Addon by EternalShade3D</title>
+    <meta name="description" content="High-precision utility toolkit for Blender. Mathematical accuracy for dimensions, origin alignment, naming, and scene hygiene.">
+    <meta property="og:title" content="Eternal Utility Toolbox ◈">
+    <meta property="og:description" content="Precision Scaling and Evaluated Truth Dimensions for Blender Objects">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS RESET & BASE
+           ======================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #0a0a0f;
+            --color-bg-elevated: #12121a;
+            --color-bg-card: #1a1a25;
+            --color-surface: #22222f;
+            --color-border: #2a2a3a;
+            --color-border-hover: #3a3a5a;
+            --color-text: #e8e8f0;
+            --color-text-muted: #8888a0;
+            --color-text-dim: #5a5a70;
+            --color-accent: #7c5cfc;
+            --color-accent-light: #9d85fd;
+            --color-accent-glow: rgba(124, 92, 252, 0.3);
+            --color-gold: #f0c040;
+            --color-gold-glow: rgba(240, 192, 64, 0.2);
+            --color-success: #4ade80;
+            --color-link: #60a5fa;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+            --shadow-glow: 0 0 40px var(--color-accent-glow);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--color-link);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent-light);
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* ========================================
+           HERO
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(ellipse at 50% 0%, var(--color-accent-glow) 0%, transparent 60%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23ffffff08' stroke-width='0.5'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-badge span {
+            color: var(--color-gold);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--color-accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ========================================
+           BUTTONS
+           ======================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: #fff;
+            box-shadow: 0 4px 16px var(--color-accent-glow);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px var(--color-accent-glow);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: var(--color-surface);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-border-hover);
+            background: var(--color-bg-card);
+            color: var(--color-text);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--color-gold), #e0a830);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px var(--color-gold-glow);
+            color: #000;
+        }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 0;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-text);
+        }
+
+        .nav-brand span {
+            color: var(--color-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text-muted);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-text);
+        }
+
+        /* ========================================
+           FEATURES
+           ======================================== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--color-border-hover);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           SCREENSHOTS
+           ======================================== */
+        .screenshots {
+            background: var(--color-bg-elevated);
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+        }
+
+        .screenshot-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .screenshot-card:hover {
+            border-color: var(--color-border-hover);
+            transform: translateY(-4px);
+        }
+
+        .screenshot-placeholder {
+            aspect-ratio: 16/9;
+            background: var(--color-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-dim);
+            font-size: 14px;
+        }
+
+        .screenshot-card figcaption {
+            padding: 16px 20px;
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        /* ========================================
+           PRICING
+           ======================================== */
+        .pricing-cards {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            text-align: center;
+            min-width: 300px;
+            max-width: 400px;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-accent-light);
+            margin: 20px 0;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            text-align: left;
+            margin: 24px 0;
+        }
+
+        .pricing-card li {
+            padding: 8px 0;
+            color: var(--color-text-muted);
+            font-size: 14px;
+        }
+
+        .pricing-card li::before {
+            content: '✓';
+            color: var(--color-success);
+            margin-right: 10px;
+            font-weight: 700;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .footer p {
+            color: var(--color-text-dim);
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            color: var(--color-text-muted);
+            font-size: 14px;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         NAVIGATION
+         ========================================== -->
+    <nav class="nav">
+        <div class="container nav-inner">
+            <div class="nav-brand">Eternal<span>Shade3D</span></div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#docs">Documentation</a></li>
+                <li><a href="#pricing">Get It</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         HERO
+         ========================================== -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-badge">Blender 4.2+ Addon &bull; <span>v1.22.0</span></div>
+            <h1>Eternal Utility<br>Toolbox ◈</h1>
+            <p>Precision Scaling and Evaluated Truth Dimensions for Objects. A high-precision utility toolkit focused on mathematical accuracy within the Blender workflow.</p>
+            <div class="hero-actions">
+                <a href="https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox" class="btn btn-gold" target="_blank" rel="noopener">
+                    💎 Get It on Gumroad
+                </a>
+                <a href="https://www.fairmarket.land/product/eternal-utility-toolbox" class="btn btn-primary" target="_blank" rel="noopener">
+                    🛒 Get It on FairMarket
+                </a>
+                <a href="#docs" class="btn btn-secondary">📖 Read Docs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FEATURES
+         ========================================== -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>What's Inside</h2>
+                <p>Everything you need for mathematical precision in Blender</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📐</div>
+                    <h3>Evaluated Truth Dimensions</h3>
+                    <p>Real-time monitoring of object size accounting for the entire modifier stack — including Geometry Nodes, Subdivision Surface, and more. No more guessing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✏️</div>
+                    <h3>Edit Mode Precision</h3>
+                    <p>Direct dimension input and scaling for vertex, edge, and face selections. Type exact values and watch your geometry respond with mathematical accuracy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Smart Origin Alignment</h3>
+                    <p>Mathematical snapping of origins to bounding box coordinates, geometry medians, or the 3D cursor. 9-point compass grid for precise placement.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏷️</div>
+                    <h3>Dynamic Naming Engine</h3>
+                    <p>Systematic asset management with customizable naming presets. Category, type, and name tags with automatic date prefixing and sequential indexing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧹</div>
+                    <h3>Scene Hygiene</h3>
+                    <p>Clean up .001 materials, purge orphaned data blocks, and maintain professional production scenes with one-click material and data cleanup.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Color Utilities</h3>
+                    <p>Random material assignment to loose parts and UV islands for quick visualization. Restore base materials instantly when done.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SCREENSHOTS
+         ========================================== -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2>See It In Action</h2>
+                <p>Real workflow inside Blender</p>
+            </div>
+            <div class="screenshot-grid">
+                <figure class="screenshot-card">
+                    <div class="screenshot-placeholder">[ Dimensions Panel Screenshot ]</div>
+                    <figcaption>Live dimension sliders with Truth Mode toggle and real-time sync</figcaption>
+                </figure>
+                <figure class="screenshot-card">
+                    <div class="screenshot-placeholder">[ Origin Alignment Screenshot ]</div>
+                    <figcaption>9-point compass grid for precise origin alignment</figcaption>
+                </figure>
+                <figure class="screenshot-card">
+                    <div class="screenshot-placeholder">[ Naming Engine Screenshot ]</div>
+                    <figcaption>Systematic asset naming with customizable presets</figcaption>
+                </figure>
+                <figure class="screenshot-card">
+                    <div class="screenshot-placeholder">[ Scene Hygiene Screenshot ]</div>
+                    <figcaption>One-click material cleanup and orphan purging</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         PRICING / CTA
+         ========================================== -->
+    <section id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get Eternal Utility Toolbox</h2>
+                <p>Available now on trusted marketplaces</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>💎 Gumroad</h3>
+                    <p class="price">Get It Now</p>
+                    <ul>
+                        <li>Instant download</li>
+                        <li>Lifetime updates</li>
+                        <li>Blender 4.2+ compatible</li>
+                        <li>Direct creator support</li>
+                    </ul>
+                    <a href="https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox" class="btn btn-gold" target="_blank" rel="noopener" style="width:100%;justify-content:center;">
+                        Buy on Gumroad →
+                    </a>
+                </div>
+                <div class="pricing-card">
+                    <h3>🛒 FairMarket</h3>
+                    <p class="price">Get It Now</p>
+                    <ul>
+                        <li>Secure checkout</li>
+                        <li>Lifetime updates</li>
+                        <li>Blender 4.2+ compatible</li>
+                        <li>Community marketplace</li>
+                    </ul>
+                    <a href="https://www.fairmarket.land/product/eternal-utility-toolbox" class="btn btn-primary" target="_blank" rel="noopener" style="width:100%;justify-content:center;">
+                        Buy on FairMarket →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         DOCS SECTION
+         ========================================== -->
+    <section id="docs" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2>Documentation</h2>
+                <p>Quick start guides and feature references</p>
+            </div>
+            <div class="features-grid">
+                <a href="#docs-installation" class="feature-card" style="text-decoration:none;color:inherit;">
+                    <div class="feature-icon">📦</div>
+                    <h3>Installation Guide</h3>
+                    <p>How to install and enable the addon in Blender 4.2+</p>
+                </a>
+                <a href="#docs-dimensions" class="feature-card" style="text-decoration:none;color:inherit;">
+                    <div class="feature-icon">📐</div>
+                    <h3>Dimensions Guide</h3>
+                    <p>Using truth dimensions, scaling, and group bounds</p>
+                </a>
+                <a href="#docs-origin" class="feature-card" style="text-decoration:none;color:inherit;">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Origin Alignment</h3>
+                    <p>Snapping origins to geometry, cursor, and bounding box points</p>
+                </a>
+                <a href="#docs-naming" class="feature-card" style="text-decoration:none;color:inherit;">
+                    <div class="feature-icon">🏷️</div>
+                    <h3>Naming Engine</h3>
+                    <p>Creating presets and batch-naming assets</p>
+                </a>
+                <a href="#docs-cleanup" class="feature-card" style="text-decoration:none;color:inherit;">
+                    <div class="feature-icon">🧹</div>
+                    <h3>Scene Hygiene</h3>
+                    <p>Material cleanup and orphan purging</p>
+                </a>
+                <a href="#docs-faq" class="feature-card" style="text-decoration:none;color:inherit;">
+                    <div class="feature-icon">❓</div>
+                    <h3>FAQ</h3>
+                    <p>Common questions and troubleshooting</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025–2026 EternalShade3D. All rights reserved. <br>
+            Eternal Utility Toolbox ◈ is a proprietary Blender addon.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/eternal.shade3d/" target="_blank" rel="noopener">📷 Instagram</a>
+                <a href="https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox" target="_blank" rel="noopener">💎 Gumroad</a>
+                <a href="https://www.fairmarket.land/product/eternal-utility-toolbox" target="_blank" rel="noopener">🛒 FairMarket</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
