@@ -1,21 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eternal Utility Toolbox ◈ | Blender Addon by EternalShade3D</title>
-    <meta name="description" content="High-precision utility toolkit for Blender. Mathematical accuracy for dimensions, origin alignment, naming, and scene hygiene.">
-    <meta property="og:title" content="Eternal Utility Toolbox ◈">
-    <meta property="og:description" content="Precision Scaling and Evaluated Truth Dimensions for Blender Objects">
+    <title>Eternal Utility Toolbox ◈ | Precision Dimensions for Blender</title>
+    <meta name="description"
+        content="Blender addon for Edit Mode dimensions, Truth Dimensions through modifiers, precision scaling with pivot points, smart origin alignment, and scene hygiene. Built for hard-surface modelers and ArchViz professionals.">
+    <meta name="keywords"
+        content="Blender addon, edit mode dimensions, Blender dimensions, truth dimensions, precision scaling, origin alignment, Blender extension, 3D modeling tools, ArchViz Blender, hard surface modeling">
+    <meta name="author" content="EternalShade3D">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://darknoir12.github.io/EternalShade3D-Toolbox/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Eternal Utility Toolbox ◈ — Precision Dimensions for Blender">
+    <meta property="og:description"
+        content="See real dimensions in Edit Mode. Scale selections to exact values. Truth Dimensions through all modifiers. Built for hard-surface modelers, ArchViz, and product design.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://darknoir12.github.io/EternalShade3D-Toolbox/">
+    <meta property="og:image" content="https://darknoir12.github.io/EternalShade3D-Toolbox/assets/1.jpg">
+    <meta property="og:image:alt" content="Eternal Utility Toolbox - Blender addon interface showing dimension sliders">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Eternal Utility Toolbox ◈ — Blender Addon">
+    <meta name="twitter:description"
+        content="Real dimensions in Edit Mode. Truth Dimensions through modifiers. Precision scaling with pivot points.">
+    <meta name="twitter:image" content="https://darknoir12.github.io/EternalShade3D-Toolbox/assets/1.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Eternal Utility Toolbox",
+      "operatingSystem": "Windows, macOS, Linux",
+      "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "3D Modeling Software",
+      "softwareVersion": "1.22.0",
+      "description": "High-precision utility toolkit for Blender providing evaluated truth dimensions, Edit Mode precision scaling, smart origin alignment, dynamic naming engine, and scene hygiene.",
+      "url": "https://darknoir12.github.io/EternalShade3D-Toolbox/",
+      "image": "https://darknoir12.github.io/EternalShade3D-Toolbox/assets/1.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "EternalShade3D",
+        "url": "https://www.instagram.com/eternal.shade3d/"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Gumroad",
+          "url": "https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox",
+          "category": "Digital Download"
+        },
+        {
+          "@type": "Offer",
+          "name": "FairMarket",
+          "url": "https://www.fairmarket.land/product/eternal-utility-toolbox",
+          "category": "Digital Download"
+        }
+      ],
+      "softwareRequirements": {
+        "@type": "SoftwareApplication",
+        "name": "Blender",
+        "softwareVersion": "4.2.0"
+      },
+      "featureList": [
+        "Evaluated Truth Dimensions through modifiers",
+        "Edit Mode selection dimensions and scaling",
+        "Smart Origin Alignment with 9-point compass grid",
+        "Dynamic Naming Engine with presets",
+        "Scene Hygiene and material cleanup",
+        "Color Utilities for loose parts and UV islands"
+      ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
         /* ========================================
            CSS RESET & BASE
            ======================================== */
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -42,7 +115,7 @@
             --radius-md: 12px;
             --radius-lg: 20px;
             --radius-xl: 28px;
-            --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
             --shadow-glow: 0 0 40px var(--color-accent-glow);
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -463,6 +536,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- ==========================================
@@ -487,12 +561,15 @@
         <div class="container hero-content">
             <div class="hero-badge">Blender 4.2+ Addon &bull; <span>v1.22.0</span></div>
             <h1>Eternal Utility<br>Toolbox ◈</h1>
-            <p>Precision Scaling and Evaluated Truth Dimensions for Objects. A high-precision utility toolkit focused on mathematical accuracy within the Blender workflow.</p>
+            <p>Precision Scaling and Evaluated Truth Dimensions for Objects. A high-precision utility toolkit focused on
+                mathematical accuracy within the Blender workflow.</p>
             <div class="hero-actions">
-                <a href="https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox" class="btn btn-gold" target="_blank" rel="noopener">
+                <a href="https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox" class="btn btn-gold"
+                    target="_blank" rel="noopener">
                     💎 Get It on Gumroad
                 </a>
-                <a href="https://www.fairmarket.land/product/eternal-utility-toolbox" class="btn btn-primary" target="_blank" rel="noopener">
+                <a href="https://www.fairmarket.land/product/eternal-utility-toolbox" class="btn btn-primary"
+                    target="_blank" rel="noopener">
                     🛒 Get It on FairMarket
                 </a>
                 <a href="#docs" class="btn btn-secondary">📖 Read Docs</a>
@@ -513,32 +590,38 @@
                 <div class="feature-card">
                     <div class="feature-icon">📐</div>
                     <h3>Evaluated Truth Dimensions</h3>
-                    <p>Real-time monitoring of object size accounting for the entire modifier stack — including Geometry Nodes, Subdivision Surface, and more. No more guessing.</p>
+                    <p>Real-time monitoring of object size accounting for the entire modifier stack — including Geometry
+                        Nodes, Subdivision Surface, and more. No more guessing.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">✏️</div>
                     <h3>Edit Mode Precision</h3>
-                    <p>Direct dimension input and scaling for vertex, edge, and face selections. Type exact values and watch your geometry respond with mathematical accuracy.</p>
+                    <p>Direct dimension input and scaling for vertex, edge, and face selections. Type exact values and
+                        watch your geometry respond with mathematical accuracy.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🎯</div>
                     <h3>Smart Origin Alignment</h3>
-                    <p>Mathematical snapping of origins to bounding box coordinates, geometry medians, or the 3D cursor. 9-point compass grid for precise placement.</p>
+                    <p>Mathematical snapping of origins to bounding box coordinates, geometry medians, or the 3D cursor.
+                        9-point compass grid for precise placement.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🏷️</div>
                     <h3>Dynamic Naming Engine</h3>
-                    <p>Systematic asset management with customizable naming presets. Category, type, and name tags with automatic date prefixing and sequential indexing.</p>
+                    <p>Systematic asset management with customizable naming presets. Category, type, and name tags with
+                        automatic date prefixing and sequential indexing.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🧹</div>
                     <h3>Scene Hygiene</h3>
-                    <p>Clean up .001 materials, purge orphaned data blocks, and maintain professional production scenes with one-click material and data cleanup.</p>
+                    <p>Clean up .001 materials, purge orphaned data blocks, and maintain professional production scenes
+                        with one-click material and data cleanup.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🎨</div>
                     <h3>Color Utilities</h3>
-                    <p>Random material assignment to loose parts and UV islands for quick visualization. Restore base materials instantly when done.</p>
+                    <p>Random material assignment to loose parts and UV islands for quick visualization. Restore base
+                        materials instantly when done.</p>
                 </div>
             </div>
         </div>
@@ -555,20 +638,37 @@
             </div>
             <div class="screenshot-grid">
                 <figure class="screenshot-card">
-                    <div class="screenshot-placeholder">[ Dimensions Panel Screenshot ]</div>
+                    <img src="assets/1.jpg"
+                        alt="Dimensions Panel showing live X/Y/Z dimension sliders with Truth Mode toggle"
+                        loading="lazy" style="width:100%;display:block;">
                     <figcaption>Live dimension sliders with Truth Mode toggle and real-time sync</figcaption>
                 </figure>
                 <figure class="screenshot-card">
-                    <div class="screenshot-placeholder">[ Origin Alignment Screenshot ]</div>
+                    <img src="assets/4.jpg"
+                        alt="Smart Origin Alignment 9-point compass grid for precise origin snapping" loading="lazy"
+                        style="width:100%;display:block;">
                     <figcaption>9-point compass grid for precise origin alignment</figcaption>
                 </figure>
                 <figure class="screenshot-card">
-                    <div class="screenshot-placeholder">[ Naming Engine Screenshot ]</div>
+                    <img src="assets/5.jpg" alt="Dynamic Naming Engine with category, type, and name tag presets"
+                        loading="lazy" style="width:100%;display:block;">
                     <figcaption>Systematic asset naming with customizable presets</figcaption>
                 </figure>
                 <figure class="screenshot-card">
-                    <div class="screenshot-placeholder">[ Scene Hygiene Screenshot ]</div>
+                    <img src="assets/6.jpg" alt="Scene Hygiene panel showing material cleanup and orphan purging tools"
+                        loading="lazy" style="width:100%;display:block;">
                     <figcaption>One-click material cleanup and orphan purging</figcaption>
+                </figure>
+                <figure class="screenshot-card">
+                    <img src="assets/7.jpg" alt="Edit Mode selection dimensions showing selected geometry measurements"
+                        loading="lazy" style="width:100%;display:block;">
+                    <figcaption>Edit Mode selection dimensions with pivot-respecting scaling</figcaption>
+                </figure>
+                <figure class="screenshot-card">
+                    <img src="assets/8.jpg"
+                        alt="Color Utilities assigning random colors to loose parts for visual debugging" loading="lazy"
+                        style="width:100%;display:block;">
+                    <figcaption>Color Utilities — random materials for loose parts and UV islands</figcaption>
                 </figure>
             </div>
         </div>
@@ -593,7 +693,8 @@
                         <li>Blender 4.2+ compatible</li>
                         <li>Direct creator support</li>
                     </ul>
-                    <a href="https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox" class="btn btn-gold" target="_blank" rel="noopener" style="width:100%;justify-content:center;">
+                    <a href="https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox" class="btn btn-gold"
+                        target="_blank" rel="noopener" style="width:100%;justify-content:center;">
                         Buy on Gumroad →
                     </a>
                 </div>
@@ -606,7 +707,8 @@
                         <li>Blender 4.2+ compatible</li>
                         <li>Community marketplace</li>
                     </ul>
-                    <a href="https://www.fairmarket.land/product/eternal-utility-toolbox" class="btn btn-primary" target="_blank" rel="noopener" style="width:100%;justify-content:center;">
+                    <a href="https://www.fairmarket.land/product/eternal-utility-toolbox" class="btn btn-primary"
+                        target="_blank" rel="noopener" style="width:100%;justify-content:center;">
                         Buy on FairMarket →
                     </a>
                 </div>
@@ -664,14 +766,17 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025–2026 EternalShade3D. All rights reserved. <br>
-            Eternal Utility Toolbox ◈ is a proprietary Blender addon.</p>
+                Eternal Utility Toolbox ◈ is a proprietary Blender addon.</p>
             <div class="social-links">
                 <a href="https://www.instagram.com/eternal.shade3d/" target="_blank" rel="noopener">📷 Instagram</a>
-                <a href="https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox" target="_blank" rel="noopener">💎 Gumroad</a>
-                <a href="https://www.fairmarket.land/product/eternal-utility-toolbox" target="_blank" rel="noopener">🛒 FairMarket</a>
+                <a href="https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox" target="_blank" rel="noopener">💎
+                    Gumroad</a>
+                <a href="https://www.fairmarket.land/product/eternal-utility-toolbox" target="_blank" rel="noopener">🛒
+                    FairMarket</a>
             </div>
         </div>
     </footer>
 
 </body>
+
 </html>
