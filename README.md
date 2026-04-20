@@ -1,12 +1,12 @@
 # Eternal Utility Toolbox ◈
 
-> **Precision Scaling and Evaluated Truth Dimensions for Blender**
+> **Precision Scaling and Evaluated Truth Dimensions for Blender — v1.28.3**
 
 <div align="center">
 
 **A high-precision utility toolkit for 3D artists, ArchViz professionals, and Hard-Surface modelers who demand mathematical accuracy.**
 
-[🛒 Get on Gumroad](https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox) &nbsp;|&nbsp; [🛒 Get on FairMarket](https://www.fairmarket.land/product/eternal-utility-toolbox) &nbsp;|&nbsp; [📷 Instagram](https://www.instagram.com/eternal.shade3d/) &nbsp;|&nbsp; [📖 Documentation](https://eternalshade3d.github.io/EternalShade3D-Toolbox/)
+[🛒 Get on Gumroad](https://eternalshade3d.gumroad.com/l/eternal-utility-toolbox) &nbsp;|&nbsp; [🛒 Get on FairMarket](https://www.fairmarket.land/product/eternal-utility-toolbox) &nbsp;|&nbsp; [📷 Instagram](https://www.instagram.com/eternal.shade3d/) &nbsp;|&nbsp; [💬 Discord](https://discord.gg/3uh4gn5K) &nbsp;|&nbsp; [📖 Documentation](https://eternalshade3d.github.io/EternalShade3D-Toolbox/)
 
 </div>
 
@@ -23,14 +23,17 @@ Blender is fantastic, but it leaves you blind to exact dimensions in **Edit Mode
 ## Features
 
 ### 📐 Evaluated Truth Dimensions (Object Mode)
+
 See the **real** dimensions of your object — not Blender's guess. The actual size after **ALL** modifiers (Subdivision, Displace, Bevel, Geometry Nodes) — updated in real-time with zero lag. Tested on heavy meshes with millions of verts.
 
 **Scale with precision.** Every operation respects your chosen **Transform Pivot Point** (Bounding Box, 3D Cursor, Individual Origins, Median Point, Active Element). What you see is what you scale.
 
 ### ✏️ Edit Mode Selection Dimensions
+
 Now you can see and tweak object dimensions **while inside Edit Mode**. Select any geometry — faces, edges, vertices — and scale it to the exact dimension you want: 30 cm, 200 cm, 4.5 cm. Respects your Transform Pivot Point.
 
 ### 🎯 Smart Origin Alignment
+
 Snap origins with mathematical precision:
 - **9-point compass grid** — any combination of Top/Center/Bottom, Left/Center/Right, Front/Center/Back
 - **Geometry median** — geometric center of all vertices
@@ -39,6 +42,7 @@ Snap origins with mathematical precision:
 - Uses a **Geometry Nodes hack** for instant bounding box calculation, even on 10M+ vertex meshes
 
 ### 🏷️ Dynamic Naming Engine
+
 Systematic asset management with customizable presets:
 - Date prefixing: `2026 04 — PRODUCT — CHAIR — MODEL.001`
 - Category, Type, and Name tag system with save/load presets
@@ -46,12 +50,14 @@ Systematic asset management with customizable presets:
 - External JSON preset storage
 
 ### 🧹 Scene Hygiene
+
 Keep scenes clean and professional:
 - **Clean .001 Materials** — merge duplicates and remap all users
 - **Purge Orphans** — remove all orphaned data blocks recursively
 - **Obj Name ↔ Mat Name** — sync object and material names
 
 ### 🎨 Color Utilities
+
 Visual debugging for complex meshes:
 - **Random Loose Parts** — assign distinct colors to separate mesh islands
 - **Random UV Islands** — color-code separate UV clusters
@@ -99,9 +105,9 @@ Visual debugging for complex meshes:
 ## Documentation
 
 Full documentation with detailed feature explanations is available:
-
-- **[GitHub Pages Site](https://darknoir12.github.io/EternalShade3D-Toolbox/)** — product overview and guides
+- **[GitHub Pages Site](https://eternalshade3d.github.io/EternalShade3D-Toolbox/)** — product overview and guides
 - **[docs/documentation.md](docs/documentation.md)** — complete user guide with panel layouts, examples, and FAQ
+- **[CHANGELOG.md](CHANGELOG.md)** — full version history
 
 ---
 
@@ -135,6 +141,7 @@ This public repository contains **only** marketing and documentation materials:
 |------|---------|
 | `index.html` | Product landing page (GitHub Pages) |
 | `README.md` | This file — product overview |
+| `CHANGELOG.md` | Version history |
 | `docs/documentation.md` | Full user guide |
 | `assets/` | Marketing screenshots |
 | `blender_manifest.toml` | Extension metadata (no code) |
